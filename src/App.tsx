@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export interface IAppProps {
 }
 
-export default App;
+interface IState {
+  Labeltext:string;
+  changeColor: any;
+
+}
+
+
+export default class App extends React.Component<IAppProps,IState> {
+    constructor(props: IAppProps) {
+        super(props);
+
+        this.state = {changeColor:"",Labeltext:""}
+      
+
+    }
+    componentDidMount() {
+      this.setState({ changeColor:"green"})
+      this.setState({Labeltext:"I am using componentDidMount to Change my color"})
+  
+    }
+  
+
+    public changColor = () => {
+      this.setState({ changeColor:"blue" })
+    }
+
+  public render() {
+    return (
+
+      <div style={{backgroundColor: this.state.changeColor}}
+      >
+        <h1>{this.state.Labeltext}</h1>
+             {/* <button   onClick={this.componentDidMount} >Click</button> */}
+             <button  onClick={this.changColor} > Change Color </button>
+
+
+      </div>
+    );
+  }
+}
